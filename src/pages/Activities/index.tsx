@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { Row, Col, Input, Select, DatePicker, Button, PageHeader, Table, Modal } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 import styles from './index.less';
-import { PlusSquareOutlined } from '@ant-design/icons';
-
+import { PlusSquareOutlined, SearchOutlined } from '@ant-design/icons';
+import { history } from 'umi';
 
 const Activities: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -16,6 +15,16 @@ const Activities: React.FC = () => {
     setModalContentTex(record?.activityName)
     setIsModalVisible(true);
   };
+  // 操作：关闭活动或者查看效果
+  const operate = (record: any, event: any) => {
+    console.log(event)
+    if (event?.target?.innerText === '关闭活动') {
+      showModal(record)
+    } else {
+      history.push('/create-activity')
+    }
+
+  }
   // 对话框确认
   const handleOk = () => {
     setIsModalVisible(false);
@@ -96,7 +105,7 @@ const Activities: React.FC = () => {
         <>
           {opreation.map((item: any, index: number) => {
             return (
-              <Button onClick={() => { showModal(record) }} className={styles.operate} key={index}>
+              <Button onClick={(event) => { operate(record, event) }} className={styles.operate} key={index}>
                 {item}
               </Button>
             );
@@ -106,7 +115,7 @@ const Activities: React.FC = () => {
     }
   ];
 
-  const data = [
+  const activiesData = [
     {
       key: '1',
       activityId: 'John Brown',
@@ -188,8 +197,11 @@ const Activities: React.FC = () => {
         </div>
       </div>
       <div className={styles.activityList}>
-        <Table columns={columns} dataSource={data}
-        />
+        {
+          activiesData
+            ? <Table columns={columns} dataSource={activiesData} />
+            : <div>暂无数据</div>
+        }
       </div>
       <Modal title="提示" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <p>请确认是否要关闭活动{modalContentText}</p>

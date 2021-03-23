@@ -28,6 +28,12 @@
     component: './Activities',
   },
   {
+    path: '/create-activity',
+    name: '创建活动',
+    icon: 'smile',
+    component: './CreateActivity',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
