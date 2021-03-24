@@ -23,15 +23,22 @@
   },
   {
     path: '/activities',
-    name: '活动列表',
+    name: '活动管理',
     icon: 'smile',
-    component: './Activities',
-  },
-  {
-    path: '/create-activity',
-    name: '创建活动',
-    icon: 'smile',
-    component: './CreateActivity',
+    // component: './Activities',
+    routes: [
+      {
+        path: '/activities/activity-list',
+        name: '活动列表',
+        component: './Activities',
+      },
+      {
+        path: '/activities/create-activity',
+        name: '创建活动',
+        icon: 'smile',
+        component: './CreateActivity',
+      }
+    ],
   },
   {
     path: '/admin',
