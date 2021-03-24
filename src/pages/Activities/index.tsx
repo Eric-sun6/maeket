@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Row, Col, Input, Select, DatePicker, Button, PageHeader, Table, Modal } from 'antd';
+import { Row, Col, Input, Select, DatePicker, Button, PageHeader, Table, Modal, Empty } from 'antd';
 import styles from './index.less';
 import { PlusSquareOutlined, SearchOutlined } from '@ant-design/icons';
 import { history } from 'umi';
@@ -200,7 +200,7 @@ const Activities: React.FC = () => {
         {
           activiesData
             ? <Table columns={columns} dataSource={activiesData} />
-            : <div>暂无数据</div>
+            : <Empty />
         }
       </div>
       <Modal title="提示" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
